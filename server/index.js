@@ -4,6 +4,7 @@ const app = express();
 const {chats} = require("./temp")
 const userRoutes = require('./routes/userRoutes');
 const { notFound, errorHandler } = require("./middleware/errorMiddleware");
+const chatRoutes = require('./routes/chatRoutes');
 
 require('dotenv').config();
 connectDB();
@@ -12,12 +13,14 @@ app.use(express.json());
 app.get("/",(req,res)=>{
     res.send("Hi this is Home!!");
 })
-app.get("/chats",(req,res)=>{
-    res.send("hi this is chats!!");
-})
+app.use('/api/chat',chatRoutes);
+
 app.use('/api/user',userRoutes)
+
 app.use(notFound);
+
 app.use(errorHandler );
+
 const PORT = process.env.PORT;
 app.listen(PORT,()=>{
     console.log(`Server is running at ${PORT}`);
