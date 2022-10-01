@@ -89,16 +89,20 @@ const SideDrawer = () => {
     setLoadingChat(true);
     try{
       const config={
-        "Content-type":"application/json",
-        Authorization:`Bearer ${user.token}`
+        "Content-type": "application/json",
+        headers:{
+          Authorization: `Bearer ${user.token}`,
+        }
       }
-      const { data } = await axios.post('/api/chat',{ userId },config);
-      if(!chats.find((c)=>c._id===data._id))
-        setChats({data, ...chats});
+      const { data } = await axios.post('/api/chat',{userId},config);
+      console.log(chats)
+      if(!chats.data?.find((c)=>c._id===data._id))
+        setChats([data, ...chats]);
       setSelectedChat(data);
       setLoadingChat(false);
       onClose();
     }catch(err){
+      console.log(err)
       Toast({
         title:"Error Occured",
         status:"error",
