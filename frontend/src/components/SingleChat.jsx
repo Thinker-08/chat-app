@@ -12,7 +12,7 @@ import ScrollableChat from './ScrollableChat'
 import io from "socket.io-client";
 import Lottie from "react-lottie"
 import animationData from "./animations/typing.json"
-const ENDPOINT="http://localhost:5000";
+const ENDPOINT="https://chat-app-mern-socketio123.herokuapp.com/";
 var socket,selectedChatCompare;
 
 
@@ -29,7 +29,13 @@ const SingleChat = ({fetchAgain,setFetchAgain}) => {
     const [messages, setMessages] = useState([]);
     const [loading,setLoading] = useState(false);
     const [newMessage,setNewMessage] = useState();
-    const { user, selectedChat, setSelectedChat} = ChatState()
+
+    const { user,
+        selectedChat,
+        setSelectedChat,
+        notification,
+        setNotification} = ChatState()
+
     const toast = useToast();
     const [socketConnected, setSocketConnected] = useState(false);
     const [typing, setTyping] = useState(false)
@@ -105,17 +111,18 @@ const SingleChat = ({fetchAgain,setFetchAgain}) => {
     useEffect(() => {
         socket.on('message recieved',(newMessageRecieved)=>{
             if(!selectedChatCompare || selectedChatCompare._id !==newMessageRecieved.chat._id){
-                //give Notification
-            }
+                if(!notification.includes(newMessageRecieved)){
+                    setNotification([newMessageRecieved,...notification]);
+                    setFetchAgain(!fetchAgain);
+                }
             else{
                 setMessages([...messages,newMessageRecieved]);
             }
-        })
-    })
+        }
+    })})
     
     const typingHandler = (e)=>{
         setNewMessage(e.target.value);
-        // Typing logic
         if(!socketConnected)
             return;
         if(!typing){

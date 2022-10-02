@@ -6,14 +6,13 @@ const userRoutes = require('./routes/userRoutes');
 const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 const chatRoutes = require('./routes/chatRoutes');
 const messageRoutes = require('./routes/messageRoutes');
+const path = require('path');
 
 require('dotenv').config();
 connectDB();
 
 app.use(express.json());
-app.get("/",(req,res)=>{
-    res.send("Hi this is Home!!");
-})
+
 app.use('/api/chat',chatRoutes);
 
 app.use('/api/user',userRoutes);
@@ -23,7 +22,21 @@ app.use(notFound);
 
 app.use(errorHandler );
 
-const PORT = process.env.PORT;
+const __dirname1 = path.resolve();
+if(process.env.NODE_ENV==='production'){
+
+    app.use(express.static(path.join(__dirnam1,'/frontend/build')))
+    app.get('*',(req,res)=>{
+        res.sendFile(path.resolve(__dirname1,"frontend","build","index.html"))
+    })
+
+}else{
+    app.get("/",(req,res)=>{
+        res.send("Hi this is Home!!");
+    })
+}
+
+const PORT = process.env.PORT || 5000;
 const server = app.listen(PORT,()=>{
     console.log(`Server is running at ${PORT}`);
 })
