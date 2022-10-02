@@ -196,7 +196,7 @@ const SingleChat = ({fetchAgain,setFetchAgain}) => {
                     </div>
                 )}
                 <FormControl onKeyDown={sendMessage} isRequired mt={3}>
-                    {isTyping?"Loading":""}
+                    {isTyping?"Loading ........":""}
                     <Input 
                         variant="filled"
                         bg="#38B2AC"

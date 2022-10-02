@@ -35,7 +35,6 @@ import { useNavigate } from "react-router-dom";
 import ChatLoading from "./ChatLoading";
 import UserListItem from "../UserAvatar/UserListItem";
 import { getSender } from "../../config/ChatLogic";
-import NotificationBadge, { Effect } from "react-notification-badge"
 
 const SideDrawer = () => {
   const navigate = useNavigate();
@@ -143,8 +142,7 @@ const SideDrawer = () => {
       <div>
         <Menu>
           <MenuButton p={1}>
-          <NotificationBadge count={notification.length} effect={Effect.SCALE} />
-            <BellIcon fontSize="2xl" m={1} />
+            <BellIcon fontSize="2xl" m={1} />{notification.length?"!":""}
           </MenuButton>
            <MenuList pl={2}>
             {!notification.length?"No New Messages":
