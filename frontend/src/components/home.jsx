@@ -26,7 +26,7 @@ const Home = () => {
         borderRadius="lg"
         borderWidth="1px">
         <Text fontSize='4xl'>
-          Heading
+          MyChat-App
         </Text>
       </Box>
       <Box bg="#dadbda" w="100%" p={2} borderRadius="lg" borderWidth="1px" color="black">

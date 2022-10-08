@@ -10,8 +10,9 @@ import UpdateGroupChatModel from './Miscellaneous/UpdateGroupChatModel'
 import '../components/styles.css'
 import ScrollableChat from './ScrollableChat'
 import io from "socket.io-client";
+import Lottie from "react-lottie"
 import animationData from "./animations/typing.json"
-const ENDPOINT="https://chat-app-mern-socketio123.herokuapp.com/";
+const ENDPOINT="http://localhost:5000";
 var socket,selectedChatCompare;
 
 
@@ -196,7 +197,11 @@ const SingleChat = ({fetchAgain,setFetchAgain}) => {
                     </div>
                 )}
                 <FormControl onKeyDown={sendMessage} isRequired mt={3}>
-                    {isTyping?"Loading ........":""}
+                    {isTyping?<Lottie
+                        options={defaultOptions} 
+                        width={70}
+                        style={{marginBottom:10,marginLeft:0}}
+                    />:""}
                     <Input 
                         variant="filled"
                         bg="#38B2AC"
