@@ -29,7 +29,6 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios"
 import { BellIcon, ChevronDownIcon } from "@chakra-ui/icons";
-import NotificationBadge from "react-notification-badge";
 import { ChatState } from "../../Context/ChatProvider";
 import ProfileModel from "./ProfileModel";
 import { useNavigate } from "react-router-dom";
@@ -98,7 +97,7 @@ const SideDrawer = () => {
       }
       const { data } = await axios.post('/api/chat',{userId},config);
       console.log(chats)
-      if(!chats.data?.find((c)=>c._id===data._id))
+      if(!chats?.data?.find((c)=>c._id===data._id))
         setChats([data, ...chats]);
       setSelectedChat(data);
       setLoadingChat(false);
@@ -143,7 +142,7 @@ const SideDrawer = () => {
       <div>
         <Menu>
           <MenuButton p={1}>
-            <BellIcon fontSize="2xl" m={1}></BellIcon
+            <BellIcon fontSize="2xl" m={1}></BellIcon>
           </MenuButton>
            <MenuList pl={2}>
             {!notification.length?"No New Messages":

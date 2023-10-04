@@ -62,6 +62,7 @@ const SingleChat = ({fetchAgain,setFetchAgain}) => {
                     content: newMessage,
                     chatId: selectedChat._id
                 },config)
+                console.log("Hi this is data", data, selectedChat._id);
                 socket.emit('new message',data);  
             setMessages([...messages,data]);
             }catch(error){
@@ -110,6 +111,7 @@ const SingleChat = ({fetchAgain,setFetchAgain}) => {
     
     useEffect(() => {
         socket.on('message recieved',(newMessageRecieved)=>{
+            console.log('Hi I recieved a new message' ,newMessageRecieved)
             if(!selectedChatCompare || selectedChatCompare._id !==newMessageRecieved.chat._id){
                 if(!notification.includes(newMessageRecieved)){
                     setNotification([newMessageRecieved,...notification]);
@@ -118,6 +120,9 @@ const SingleChat = ({fetchAgain,setFetchAgain}) => {
             else{
                 setMessages([...messages,newMessageRecieved]);
             }
+        }
+        else {
+            setMessages([...messages, newMessageRecieved]);
         }
     })})
     

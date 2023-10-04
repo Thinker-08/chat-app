@@ -9,7 +9,7 @@ const accessChat = asyncHandler(async(req,res)=>{
         return res.sendStatus(400);
     }
     var isChat = await Chat.find({
-        isGoroup:false,
+        isGroup:false,
         $and:[
             {users:{$elemMatch:{$eq:req.user._id}}},    // req.user._id from authmiddleware
             {users:{$elemMatch: {$eq:userId}}},         // userId as requested by user

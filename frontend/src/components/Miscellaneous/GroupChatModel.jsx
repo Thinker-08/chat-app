@@ -83,7 +83,7 @@ const GroupChatModel = ({children}) => {
             },config);
             console.log(chats);
             console.log(data);
-            setChats([data, ...chats]);
+            if(!chats){setChats([data, ...chats]);}
             onClose();
             setLoading(false);
             toast({
