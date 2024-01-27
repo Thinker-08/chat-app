@@ -39,7 +39,8 @@ const SingleChat = ({fetchAgain,setFetchAgain}) => {
     const toast = useToast();
     const [socketConnected, setSocketConnected] = useState(false);
     const [typing, setTyping] = useState(false)
-    const [isTyping, setIsTyping] = useState(false)
+    const [isTyping, setIsTyping] = useState(false);
+    const [timerTyping, setTimerTyping] = useState(null);
     useEffect(()=>{
         socket = io(ENDPOINT);
         socket.emit('setup',user);
@@ -135,8 +136,11 @@ const SingleChat = ({fetchAgain,setFetchAgain}) => {
             socket.emit("typing",selectedChat._id)
         }
         let lastTypingTime = new Date().getTime();
-        var timerLength = 3000;
-        setTimeout(() => {
+        var timerLength = 2000;
+        if(timerTyping) {
+            clearTimeout(timerTyping);
+        }
+        const timer = setTimeout(() => {
             var timeNow = new Date().getTime();
             var timeDiff = timeNow-lastTypingTime;
             if(timeDiff>=timerLength && typing){
@@ -144,6 +148,7 @@ const SingleChat = ({fetchAgain,setFetchAgain}) => {
                 setTyping(false);
             }
         }, timerLength);
+        setTimerTyping(timer);
     }
 
     return (

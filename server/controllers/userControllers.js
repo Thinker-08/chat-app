@@ -1,6 +1,8 @@
 const asyncHandler = require("express-async-handler");
 const generateToken = require("../config/generateToken");
 const User = require("../models/UserModel")
+const Chat = require('../models/chatModel');
+const Message = require('../models/messageModel');
 
 const registerUser = asyncHandler(async(req,res)=>{
     try{
@@ -50,6 +52,7 @@ const authUser = asyncHandler(async(req,res)=>{
         });
     }else{
         res.status(401);
+        console.log("Invalid Email or Password")
         throw new Error("Invalid Email or Password");
     }
 });
