@@ -96,9 +96,8 @@ const SideDrawer = () => {
         }
       }
       const { data } = await axios.post('/api/chat',{userId},config);
-      console.log(chats)
       if(!chats?.data?.find((c)=>c._id===data._id))
-        setChats([data, ...chats]);
+        setChats([data, ...chats.data]);
       setSelectedChat(data);
       setLoadingChat(false);
       onClose();
