@@ -13,7 +13,7 @@ const MyChats = ({fetchAgain}) => {
   const toast = useToast();
   const fetchChats=async()=>{
     try{
-      const data = await axios.get("/api/chat",{
+      const data = await axios.get("http://3.109.237.117:5000/api/chat",{
           headers:{
           Authorization: `Bearer ${user==null?"":user.token}`,
         }

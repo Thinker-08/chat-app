@@ -41,7 +41,7 @@ const GroupChatModel = ({children}) => {
                     Authorization:`Bearer ${user.token}`
                 },
             }
-            const {data}=await axios.get(`/api/user?search=${search}`,config);
+            const {data}=await axios.get(`http://3.109.237.117:5000/api/user?search=${search}`,config);
             console.log(data);
             setLoading(false);
             setSearchResults(data);
@@ -77,7 +77,7 @@ const GroupChatModel = ({children}) => {
                     Authorization:`Bearer ${user.token}`
                 },
             }
-            const {data} = await axios.post('/api/chat/group',{
+            const {data} = await axios.post('http://3.109.237.117:5000/api/chat/group',{
                 name:groupChatName,
                 users:JSON.stringify(selectedUsers.map(u=>u._id))
             },config);

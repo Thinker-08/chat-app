@@ -12,7 +12,7 @@ import ScrollableChat from './ScrollableChat'
 import io from "socket.io-client";
 import Lottie from "react-lottie"
 import animationData from "./animations/typing.json"
-const ENDPOINT="http://localhost:5000";
+const ENDPOINT="http://3.109.237.117:5000";
 var socket,selectedChatCompare;
 
 
@@ -59,7 +59,7 @@ const SingleChat = ({fetchAgain,setFetchAgain}) => {
                     Authorization: `Bearer ${user.token}`,
                 }
                 }
-                const {data}=await axios.post('/api/message',{
+                const {data}=await axios.post('http://3.109.237.117:5000/api/message',{
                     content: newMessage,
                     chatId: selectedChat._id
                 },config)
@@ -89,7 +89,7 @@ const SingleChat = ({fetchAgain,setFetchAgain}) => {
                     Authorization: `Bearer ${user.token}`
                 }
             }
-            const {data} = await axios.get(`/api/message/${selectedChat._id}`,config);
+            const {data} = await axios.get(`http://3.109.237.117:5000/api/message/${selectedChat._id}`,config);
             setMessages(data);
             setLoading(false);
             socket.emit('join chat',selectedChat._id);

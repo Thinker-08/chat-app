@@ -30,7 +30,7 @@ const Login = () => {
                     'Content-type':"application/json",
                 },
             };
-            const { data } = await axios.post("/api/user/login",
+            const { data } = await axios.post("http://3.109.237.117:5000/api/user/login",
             {email,password},config);
             Toast({
                 title:"Registration Successful",

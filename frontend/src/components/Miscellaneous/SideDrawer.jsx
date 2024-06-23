@@ -69,7 +69,7 @@ const SideDrawer = () => {
             Authorization:`Bearer ${user==null?"":user.token}`
           }
         }
-        const  {data} = await axios.get(`/api/user?search=${search}`,config);
+        const  {data} = await axios.get(`http://3.109.237.117:5000/api/user?search=${search}`,config);
         setSearchResult(data);
         setLoading(false);
       }
@@ -95,7 +95,7 @@ const SideDrawer = () => {
           Authorization: `Bearer ${user.token}`,
         }
       }
-      const { data } = await axios.post('/api/chat',{userId},config);
+      const { data } = await axios.post('http://3.109.237.117:5000/api/chat',{userId},config);
       if(!chats?.data?.find((c)=>c._id===data._id))
         setChats([data, ...chats.data]);
       setSelectedChat(data);

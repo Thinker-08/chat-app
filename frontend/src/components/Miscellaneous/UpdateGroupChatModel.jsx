@@ -50,7 +50,7 @@ const UpdateGroupChatModel = ({fetchAgain,setFetchAgain,fetchMessages}) => {
                     Authorization:`Bearer ${user.token}`
                 }
             }
-            const {data} = await axios.put('/api/chat/groupremove',{
+            const {data} = await axios.put('http://3.109.237.117:5000/api/chat/groupremove',{
                 chatId:selectedChat._id,
                 userId:user1._id
             },config);
@@ -81,7 +81,7 @@ const UpdateGroupChatModel = ({fetchAgain,setFetchAgain,fetchMessages}) => {
                     Authorization:`Bearer ${user.token}`
                 }
             }
-            const {data} = await axios.put('/api/chat/rename',{
+            const {data} = await axios.put('http://3.109.237.117:5000/api/chat/rename',{
                 chatId:selectedChat._id,
                 chatName:groupChatname
             },config)
@@ -115,7 +115,7 @@ const UpdateGroupChatModel = ({fetchAgain,setFetchAgain,fetchMessages}) => {
                     Authorization:`Bearer ${user.token}`
                 },
             }
-            const {data}=await axios.get(`/api/user?search=${search}`,config);
+            const {data}=await axios.get(`http://3.109.237.117:5000/api/user?search=${search}`,config);
             setLoading(false);
             setSearchResult(data);
         }catch(err){
@@ -159,7 +159,7 @@ const UpdateGroupChatModel = ({fetchAgain,setFetchAgain,fetchMessages}) => {
                     Authorization:`Bearer ${user.token}`
                 }
             }
-            const {data} = await axios.put('/api/chat/groupadd',{
+            const {data} = await axios.put('http://3.109.237.117:5000/api/chat/groupadd',{
                 chatId:selectedChat._id,
                 userId:user1._id
             },config);
