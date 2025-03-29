@@ -11,7 +11,7 @@ connectDB(process.env.MONGO_URI);
 const app = express();
 app.use(cors());
 app.use(express.json());
-console.log("another test")
+console.log("another test 1")
 app.use("/api/user", userRoutes);
 app.use("/api/chat", chatRoutes);
 app.use("/api/message", messageRoutes);
